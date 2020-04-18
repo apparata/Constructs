@@ -324,7 +324,7 @@ public final class ServiceProvider {
     ///
     /// Example:
     ///
-    /// ```    ///
+    /// ```
     /// let fileStorageManager = FileStorageManager()
     /// ServiceProvider.addService(qualifier: "myTracking", TrackingService() as RESTService)
     /// ```

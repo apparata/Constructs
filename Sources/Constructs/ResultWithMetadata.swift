@@ -71,7 +71,7 @@ extension ResultWithMetadata: CustomStringConvertible {
     
     public var description: String {
         switch self {
-        case .success(let value):
+        case .success(let value, _):
             return "Result(success: \(value))"
         case .failure(let error):
             return "Result(failure: \(error))"
