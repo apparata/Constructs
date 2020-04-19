@@ -5,7 +5,7 @@
 import Foundation
 
 extension URL {
-    init(validString: StaticString) {
+    init(validString: String) {
         self.init(string: validString.description)!
     }
 }
