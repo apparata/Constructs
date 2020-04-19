@@ -78,7 +78,7 @@ public struct Dependencies {
         return value
     }
     
-    public func resolve(for object: AnyObject) {
+    public func resolveProperties(for object: Any) {
         let mirror = Mirror(reflecting: object)
         for child in mirror.children {
             if let property = child.value as? DependencyProperty {
