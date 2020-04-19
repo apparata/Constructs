@@ -2,9 +2,6 @@ import XCTest
 @testable import Constructs
 
 final class ConstructsTests: XCTestCase {
-    func testExample() {
-        XCTAssertEqual(true, true)
-    }
     
     func testDependencies() {
         
@@ -23,7 +20,7 @@ final class ConstructsTests: XCTestCase {
     }
     
     static var allTests = [
-        ("testExample", testExample),
+        ("testDependencies", testDependencies),
     ]
 }
 

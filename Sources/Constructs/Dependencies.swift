@@ -46,7 +46,7 @@ public struct Dependencies {
         self.registry = registry
     }
     
-    public func adding<T: Any>(_ dependency: @autoclosure @escaping () -> T) -> Dependencies {
+    public func adding<T: Dependable>(_ dependency: @autoclosure @escaping () -> T) -> Dependencies {
         var dependencies = Dependencies(registry: registry)
         dependencies.registry[DependencyIdentifier(T.self)] = dependency
         return dependencies
