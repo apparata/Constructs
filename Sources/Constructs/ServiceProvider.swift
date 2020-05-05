@@ -47,7 +47,7 @@ public final class ServiceProvider {
     
     fileprivate typealias Factory = (Qualifier?) -> Any
     
-    fileprivate struct Identifier : Hashable {
+    fileprivate struct Identifier: Hashable {
         fileprivate let type: Any.Type
         fileprivate let qualifier: Qualifier?
         
@@ -349,7 +349,7 @@ public final class ServiceProvider {
 
 // This is needed for ServiceProvider.Identifier to conform to the Equatable
 // protocol which Hashable inherits from.
-private func ==(lhs: ServiceProvider.Identifier,
-                rhs: ServiceProvider.Identifier) -> Bool {
+private func == (lhs: ServiceProvider.Identifier,
+                 rhs: ServiceProvider.Identifier) -> Bool {
     return lhs.type == rhs.type && lhs.qualifier == rhs.qualifier
 }

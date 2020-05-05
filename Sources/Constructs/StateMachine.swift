@@ -51,5 +51,3 @@ public protocol StateMachineDelegate: AnyObject {
     
     func didTransition(from state: State, to newState: State, dueTo event: Event)
 }
-
-

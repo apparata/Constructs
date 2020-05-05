@@ -20,7 +20,7 @@ final class ConstructsTests: XCTestCase {
     }
     
     static var allTests = [
-        ("testDependencies", testDependencies),
+        ("testDependencies", testDependencies)
     ]
 }
 

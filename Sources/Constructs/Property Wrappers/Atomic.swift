@@ -19,13 +19,11 @@ public class Atomic<Value> {
     private let lock = NSLock()
     
     public var wrappedValue: Value {
-        get {
-            lock.lock()
-            defer {
-                lock.unlock()
-            }
-            return value
+        lock.lock()
+        defer {
+            lock.unlock()
         }
+        return value
     }
     
     public var projectedValue: Atomic<Value> {

@@ -31,7 +31,8 @@ public final class NotificationObserver {
         notificationCenter.addObserver(self, selector: #selector(NotificationObserver.notificationObserved(_:)), name: notificationName, object: nil)
     }
     
-    @objc private func notificationObserved(_ notification: Notification) {
+    @objc
+    private func notificationObserved(_ notification: Notification) {
         handler?(notification)
     }
 }

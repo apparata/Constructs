@@ -24,6 +24,6 @@ let package = Package(
                 .define("RELEASE", .when(configuration: .release)),
                 .define("SWIFT_PACKAGE")
             ]),
-        .testTarget(name: "ConstructsTests", dependencies: ["Constructs"]),
+        .testTarget(name: "ConstructsTests", dependencies: ["Constructs"])
     ]
 )

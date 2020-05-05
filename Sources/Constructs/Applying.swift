@@ -24,7 +24,7 @@ extension Applicable {
 extension Optional {
     
     @discardableResult
-    public func applying(_ action: (Wrapped) -> Void) -> Optional<Wrapped> {
+    public func applying(_ action: (Wrapped) -> Void) -> Wrapped? {
         switch self {
         case .none:
             break

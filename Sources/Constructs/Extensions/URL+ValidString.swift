@@ -6,6 +6,8 @@ import Foundation
 
 public extension URL {
     init(validString: String) {
+        // swiftlint:disable force_unwrapping
         self.init(string: validString.description)!
+        // swiftlint:enable force_unwrapping
     }
 }
