@@ -6,7 +6,7 @@ import Foundation
 
 extension URL {
 
-    var fileExists: Bool {
+    public var fileExists: Bool {
         return isFileURL && FileManager.default.fileExists(atPath: path)
     }
 }

@@ -6,7 +6,7 @@ import Foundation
 
 extension URL {
 
-    static var documentsFolder: URL {
+    public static var documentsFolder: URL {
         do {
             return try FileManager.default.url(for: .documentDirectory,
                                                        in: .userDomainMask,
@@ -17,7 +17,7 @@ extension URL {
         }
     }
 
-    init(fileInDocuments filename: String) {
+    public init(fileInDocuments filename: String) {
         self = Self.documentsFolder
             .appendingPathComponent(filename)
     }
