@@ -8,21 +8,22 @@ public protocol Dependable {
     static var defaultInstance: Self { get }
 }
 
+@available(*, deprecated, message: "Dependency is deprecated.")
 @propertyWrapper
 public class Dependency<T: Dependable>: DependencyProperty {
 
     private var value: T!
-    
+
     private var keyPath: KeyPath<Dependencies, T>?
 
     public var wrappedValue: T {
         value
     }
-    
+
     public init(_ keyPath: KeyPath<Dependencies, T>? = nil) {
         self.keyPath = keyPath
     }
-    
+
     fileprivate func resolve(from dependencies: Dependencies) {
         if let keyPath = keyPath {
             value = dependencies.resolve(T.self, keyPath)
@@ -33,7 +34,7 @@ public class Dependency<T: Dependable>: DependencyProperty {
 }
 
 public struct Dependencies {
-    
+
     private typealias Factory = () -> Any
 
     private var registry: [AnyHashable: Factory] = [:]
@@ -41,17 +42,17 @@ public struct Dependencies {
     public init() {
         //
     }
-    
+
     private init(registry: [AnyHashable: Factory]) {
         self.registry = registry
     }
-    
+
     public func adding<T: Dependable>(_ dependency: @autoclosure @escaping () -> T) -> Dependencies {
         var dependencies = Dependencies(registry: registry)
         dependencies.registry[DependencyIdentifier(T.self)] = dependency
         return dependencies
     }
-    
+
     public func adding<T: Dependable>(_ keyPath: KeyPath<Dependencies, T>, _ dependency: @autoclosure @escaping () -> T) -> Dependencies {
         var dependencies = Dependencies(registry: registry)
         dependencies.registry[AnyHashable(keyPath)] = dependency
@@ -77,7 +78,7 @@ public struct Dependencies {
         }
         return value
     }
-    
+
     public func resolveProperties(for object: Any) {
         let mirror = Mirror(reflecting: object)
         for child in mirror.children {
@@ -101,7 +102,7 @@ private class DependencyIdentifier: Hashable {
     }
 
     public func hash(into hasher: inout Hasher) {
-      hasher.combine(ObjectIdentifier(type))
+        hasher.combine(ObjectIdentifier(type))
     }
 
     public static func == (lhs: DependencyIdentifier, rhs: DependencyIdentifier) -> Bool {
