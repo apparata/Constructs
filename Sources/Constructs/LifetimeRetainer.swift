@@ -5,13 +5,11 @@
 import Foundation
 
 public protocol LifetimeRetainable: AnyObject {
-    
     func retainedBy(_ retainer: LifetimeRetainer) -> Self
-    
 }
 
 extension LifetimeRetainable {
-    
+    // Default implementation
     func retainedBy(_ retainer: LifetimeRetainer) -> Self {
         retainer.retain(self)
         return self
@@ -21,15 +19,13 @@ extension LifetimeRetainable {
 /// Retains objects for the lifetime of the retainer object.
 ///
 /// Example:
-/// ```
+/// ```swift
 /// class Fruit: LifetimeRetainable {
-///
 ///     let isBanana: Bool
 ///
 ///     init() {
 ///         isBanana = true
 ///     }
-///
 /// }
 ///
 /// let retainer = LifetimeRetainer()
