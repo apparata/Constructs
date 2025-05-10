@@ -60,7 +60,7 @@ public final class ServiceProvider {
         }
     }
     
-    private static var factories = [Identifier: Factory]()
+    nonisolated(unsafe) private static var factories = [Identifier: Factory]()
     
     // MARK: - Services
     

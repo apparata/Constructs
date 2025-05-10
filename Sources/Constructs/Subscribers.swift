@@ -4,7 +4,7 @@
 
 import Foundation
 
-public class Subscribers<Subscriber> {
+public class Subscribers<Subscriber: Sendable> {
 
     /// The entry class keeps a weak reference to the subscriber,
     /// so that it subscribers don't have to unsubscribe manually.
@@ -46,7 +46,7 @@ public class Subscribers<Subscriber> {
     }
 
     /// Invokes closure on all subscribers
-    public func invoke(_ invocation: @escaping (Subscriber) -> Void) {
+    public func invoke(_ invocation: @Sendable @escaping (Subscriber) -> Void) {
         removeStaleEntries()
         for (_, entry) in subscribers {
             guard let subscriber = entry.subscriber else {

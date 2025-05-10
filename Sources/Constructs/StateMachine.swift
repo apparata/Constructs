@@ -7,7 +7,6 @@ import Foundation
 /// A generic state machine that transitions between states in response to events.
 ///
 /// Uses a delegate to determine valid state transitions and perform transition-related actions.
-/// Optionally ensures that state transitions occur on the main queue.
 ///
 public class StateMachine<Delegate: StateMachineDelegate> {
 
@@ -17,17 +16,13 @@ public class StateMachine<Delegate: StateMachineDelegate> {
     /// The delegate responsible for determining state transitions and receiving transition callbacks.
     public weak var delegate: Delegate?
 
-    private var fireOnMainQueue: Bool
-
     /// Initializes the state machine with an initial state and queue behavior.
     ///
     /// - Parameters:
     ///   - initialState: The initial state of the state machine.
-    ///   - fireOnMainQueue: Whether to always perform state transitions on the main queue.
     ///
-    public init(initialState: Delegate.State, fireOnMainQueue: Bool = false) {
+    public init(initialState: Delegate.State) {
         state = initialState
-        self.fireOnMainQueue = fireOnMainQueue
     }
 
     /// Fires an event and attempts to transition to a new state based on the delegate's logic.
@@ -35,16 +30,19 @@ public class StateMachine<Delegate: StateMachineDelegate> {
     /// - Parameter event: The event that may trigger a state transition.
     ///
     public func fireEvent(_ event: Delegate.Event) {
-        if fireOnMainQueue, !Thread.current.isMainThread {
-            DispatchQueue.main.sync {
-                self.internalFireEvent(event)
-            }
-        } else {
-            internalFireEvent(event)
+        if let newState = delegate?.stateToTransitionTo(from: state, dueTo: event) {
+            delegate?.willTransition(from: state, to: newState, dueTo: event)
+            let oldState = state
+            state = newState
+            delegate?.didTransition(from: oldState, to: state, dueTo: event)
         }
     }
 
-    private func internalFireEvent(_ event: Delegate.Event) {
+    /// Fires an event and attempts to transition to a new state based on the delegate's logic.
+    ///
+    /// - Parameter event: The event that may trigger a state transition.
+    ///
+    @MainActor public func fireEventOnMain(_ event: Delegate.Event) {
         if let newState = delegate?.stateToTransitionTo(from: state, dueTo: event) {
             delegate?.willTransition(from: state, to: newState, dueTo: event)
             let oldState = state
