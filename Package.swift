@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.9
 
 import PackageDescription
 
@@ -6,7 +6,7 @@ let package = Package(
     name: "Constructs",
     platforms: [
         // Relevant platforms.
-        .iOS(.v13), .macOS(.v10_15), .tvOS(.v13)
+        .iOS(.v16), .macOS(.v13), .tvOS(.v16), .visionOS(.v1)
     ],
     products: [
         .library(name: "Constructs", targets: ["Constructs"])
