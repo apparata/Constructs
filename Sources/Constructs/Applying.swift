@@ -12,8 +12,9 @@ import Foundation
 /// - Returns: The same object, allowing inline mutations or configurations.
 ///
 @discardableResult
-public func applyTo<T: AnyObject>(object: T, actions: (T) -> T) -> T {
-    return actions(object)
+public func applyTo<T: AnyObject>(object: T, actions: (T) -> Void) -> T {
+    actions(object)
+    return object
 }
 
 /// A protocol indicating that a type can be used with the `applying(_:)` extension method.
@@ -29,8 +30,9 @@ extension Applicable {
     /// - Parameter actions: A closure that takes `self` and performs mutations or configuration.
     /// - Returns: The same instance of `self`.
     @discardableResult
-    public func applying(_ actions: (Self) -> Self) -> Self {
-        return actions(self)
+    public func applying(_ actions: (Self) -> Void) -> Self {
+        actions(self)
+        return self
     }
 }
 
