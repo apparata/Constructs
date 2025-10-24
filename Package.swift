@@ -6,7 +6,7 @@ let package = Package(
     name: "Constructs",
     platforms: [
         // Relevant platforms.
-        .iOS(.v16), .macOS(.v13), .tvOS(.v16), .visionOS(.v1)
+        .iOS(.v15), .macOS(.v13), .tvOS(.v15), .visionOS(.v1)
     ],
     products: [
         .library(name: "Constructs", targets: ["Constructs"])
